@@ -1,9 +1,11 @@
 import React, { useState } from 'react'
 import { Modal } from '@mantine/core';
-import {z} from 'zod';
+import {set, z} from 'zod';
 import {useForm} from 'react-hook-form';
 import {zodResolver} from '@hookform/resolvers/zod';
 import { useCrearUsuario, useLogin } from '../../pokemonDetalles/hooks/useRegistro';
+import { flushSync } from 'react-dom';
+import { useUserStore } from '../store/userStore';
 
 const LOGIN = z.object({
     username: z.string().min(5, "El usuario es obligatorio"),
@@ -14,6 +16,9 @@ type formValues = z.infer<typeof LOGIN>;
 
 export default function ModalSesion({onOpened, onClose} : {onOpened : boolean, onClose: () => void}) {
     const [sesion, setSesion] = useState(false);
+
+    const setUser = useUserStore((state) => state.setUser);
+    const logout = useUserStore((state) => state.logout);
 
     const { mutate: login } = useLogin();
 
@@ -34,7 +39,14 @@ export default function ModalSesion({onOpened, onClose} : {onOpened : boolean, o
             crearUsuario(data);
         } else {
             // Lógica para inicio de sesión
-            login(data);
+
+            login(data, {
+                onSuccess: (data) => {
+                    flushSync(() => logout());
+                    setUser(data);
+                    form.reset();
+                },
+            });
         }
         
          console.log(data);
