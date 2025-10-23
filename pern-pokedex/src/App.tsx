@@ -6,6 +6,7 @@ import PokemonPreview from "./features/pokemonDetalles/components/PokemonPreview
 
 function App() {
   const [preview, setPreview] = useState<Pokemon | null>(null)
+
   return (
 
     <>
