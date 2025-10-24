@@ -45,6 +45,7 @@ export default function ModalSesion({onOpened, onClose} : {onOpened : boolean, o
                     flushSync(() => logout());
                     setUser(data);
                     form.reset();
+                    onClose();
                 },
             });
         }

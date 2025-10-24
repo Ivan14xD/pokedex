@@ -1,6 +1,5 @@
-import { Avatar, Menu, Modal, useModalsStack } from "@mantine/core";
-import ModalGenerica from "./ModalGenerica";
-import React, { useState } from "react";
+import { Avatar, Menu } from "@mantine/core";
+import { useState } from "react";
 import ModalSesion from "./ModalSesion";
 import { useUserStore } from "../store/userStore";
 
