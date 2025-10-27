@@ -25,7 +25,7 @@ export default function Header() {
                                     label="Mi equipo"
                                     color="warning"
                                     className="ml-10"
-                                    onClick={() => navigate("/prueba")}
+                                    onClick={() => navigate("/equipo")}
                                 />
                             </div>
                             <div className="flex space-x-4">

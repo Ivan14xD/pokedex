@@ -3,6 +3,9 @@ import App from "../App";
 import Pokedex from "../features/cuadricula/components/Pokedex";
 import Equipo from "../features/equipo/components/Equipo";
 import { EjemploUseReducer } from "../features/ejemplosHooks/EjemploUseReducer";
+import Error from "../errors/Error";
+import RutaProtegida from "../features/layout/components/RutaProtegida";
+import { Component } from "react";
 
 export const routes = createBrowserRouter([
     {
@@ -15,8 +18,12 @@ export const routes = createBrowserRouter([
                 Component: Pokedex
             },
             {
-                path:"/prueba",
-                Component: Equipo
+                path: "/equipo",
+                element: (
+                    <RutaProtegida>
+                        <Equipo />
+                    </RutaProtegida>
+                )
             },
             {
                 path: "batalla",

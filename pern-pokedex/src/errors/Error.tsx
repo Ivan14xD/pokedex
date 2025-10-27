@@ -19,10 +19,28 @@ export default function Error() {
   const error = useRouteError();
 
   if (isRouteErrorResponse(error)) {
-
+    switch (error.status) {
+      case 404:
+        return <div>Página no encontrada</div>;
+      case 500:
+        return <div>Error del servidor</div>;
+      default:
+        return (
+          <div>
+            <h1>Error {error.status}</h1>
+            <p>{error.statusText}</p>
+          </div>
+        );
+    }
   }
 
+    if (isDataWithResponseInit<{message:string}>(error)) {
+      return <h1>{error.init.status} - {error.data.message}</h1>
+      }
+
   return (
-    <div>Error</div>
+    <div>
+      <h1>Algo salió mal</h1>
+    </div>
   )
 }
